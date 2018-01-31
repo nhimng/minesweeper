@@ -9,7 +9,7 @@ public:
 	void moveCursor(char direction);
 	int getCursorRow() { return cursorRow; };
 	int getCursorCol() { return cursorCol; };
-	int makeMove(char moveType);
+	int makeMove(int moveType);
 	void showBoard();
 	char **gameScreen;
 	void newGame(game* newgame);

@@ -99,25 +99,28 @@ bool minesweeper::reveal(int rowidx, int colidx) {
 
 }
 //MoveType: 1- reveal, 2- mark
-void minesweeper::play(char moveType, int rowidx, int colidx)
+void minesweeper::play(int moveType, int rowidx, int colidx)
 {
 	if (getStatus() != 0)
 	{
-		setCursorPosition(0, 0);
+		setCursorPosition(1, 0);
 		std::cout << "Game Already Over!\n";
 		return;
 	}
 	bool isValid = true;
 	switch (moveType) {
-	case 'x':
+	case KB_X:
 		isValid = reveal(rowidx, colidx);
 		break;
-	case 'z' :
+	case KB_Z:
 		if(getValueAt(rowidx, colidx) == '0')
 			UpdateBoard(rowidx, colidx, 'f');
 		else if(getValueAt(rowidx, colidx) == 'f')
 			UpdateBoard(rowidx, colidx, '0');
 		break;
+	default:
+		setCursorPosition(1, 0);
+		std::cout << "Invalid move! 'x' to reveal, 'z' to flag.\n";
 	}
 	if (!isValid) {
 		lost();

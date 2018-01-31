@@ -62,7 +62,7 @@ void gameboard::newGame(game* newgame) {
 	}
 
 }
-int gameboard::makeMove(char moveType) {
+int gameboard::makeMove(int moveType) {
 	gameptr->play(moveType, cursorRow, cursorCol);
 	return (gameptr->getStatus());
 }
