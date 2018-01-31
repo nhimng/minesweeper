@@ -27,13 +27,13 @@ char game::getValueAt(int rowidx, int colidx) {
 void game::setLoss() {
 	status = -1; 
 	setCursorPosition(0, 0);
-	std::cout << "Game Over!          ";
+	std::cout << "Game Over!\n ";
 }
 
 void game::setWin() {
 	status = 1;
 	setCursorPosition(0, 0);
-	std::cout << "Winner!          ";
+	std::cout << "Winner!\n";
 }
 
 game::~game() {

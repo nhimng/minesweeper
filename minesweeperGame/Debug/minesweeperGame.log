@@ -1,8 +1,2 @@
-﻿  stdafx.cpp
-  minesweeperGame.cpp
-  minesweeper.cpp
-  helper.cpp
-  gameboard.cpp
-  game.cpp
-  Generating Code...
+﻿  minesweeperGame.cpp
   minesweeperGame.vcxproj -> C:\Apps\workspace\other\minesweeperGame\Debug\minesweeperGame.exe

@@ -1,4 +1,6 @@
 #include "game.h"
+#define ROW_OFSET 2
+
 class gameboard {
 public:
 	gameboard();
@@ -7,7 +9,7 @@ public:
 	void moveCursor(char direction);
 	int getCursorRow() { return cursorRow; };
 	int getCursorCol() { return cursorCol; };
-	bool makeMove(char moveType);
+	int makeMove(char moveType);
 	void showBoard();
 	char **gameScreen;
 	void newGame(game* newgame);

@@ -3,11 +3,12 @@
 #include "helper.h"
 #include <algorithm> 
 
+
 gameboard::gameboard() {
 	cursorRow = 0;
 	cursorCol = 0;
-	maxRow = 50;
-	maxCol = 50;
+	maxRow = 40;
+	maxCol = 40;
 	gameScreen = new char*[maxRow];
 	for (int i = 0; i < maxRow; i++) {
 		gameScreen[i] = new char[maxCol];
@@ -55,15 +56,15 @@ void gameboard::newGame(game* newgame) {
 		for (int j = 0; j < std::min(gameptr->getMaxCol(), maxCol); j++) {
 			char t = gameptr->getValueAt(i, j);
 			gameScreen[i][j] = t;
-			setCursorPosition(i + 1, j);
+			setCursorPosition(i + ROW_OFSET, j);
 			std::cout << t;
 		}
 	}
 
 }
-bool gameboard::makeMove(char moveType) {
+int gameboard::makeMove(char moveType) {
 	gameptr->play(moveType, cursorRow, cursorCol);
-	return (gameptr->getStatus() == 0);
+	return (gameptr->getStatus());
 }
 
 void gameboard::moveCursor(char direction) {
@@ -91,7 +92,7 @@ void gameboard::moveCursor(char direction) {
 			}
 			break;
 	}
-	setCursorPosition(cursorRow + 1, cursorCol);
+	setCursorPosition(cursorRow + 2, cursorCol);
 }
 
 void gameboard::showBoard() {
@@ -102,12 +103,12 @@ void gameboard::showBoard() {
 			char t = gameptr->getValueAt(i, j);
 			if (t == gameScreen[i][j])
 				continue;
-			setCursorPosition(i + 1, j);
+			setCursorPosition(i + ROW_OFSET, j);
 			std::cout << t;
 			gameScreen[i][j] = t;
 		}
 	}
 	std::cout.flush();
-	setCursorPosition(cursorRow+1, cursorCol);
+	setCursorPosition(cursorRow + ROW_OFSET, cursorCol);
 	return;
 }

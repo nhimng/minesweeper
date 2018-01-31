@@ -8,7 +8,9 @@ public:
 private:
 	void markBombs(int rowidx, int colidx);
 	bool reveal(int rowidx, int colidx);
+	int unmarkedCell;
 	void lost();
+	void win();
 	char ** map;
 	char ** bomb;
 	int maxBombs;

@@ -14,6 +14,7 @@ minesweeper::minesweeper(int nBombs, int row, int col): game(row, col){
 			UpdateBoard(i,j,'0');
 		}
 	}
+	unmarkedCell = row * col;
 	bomb = new char*[maxBombs];
 	int rowidx = 0;
 	int colidx = 0;
@@ -79,6 +80,7 @@ bool minesweeper::reveal(int rowidx, int colidx) {
 		return true;
 	char t = map[rowidx][colidx];
 	UpdateBoard(rowidx,colidx,t);
+	unmarkedCell--;
 	if (t == 'b')
 		return false;
 	else if (t == '.') {
@@ -102,7 +104,7 @@ void minesweeper::play(char moveType, int rowidx, int colidx)
 	if (getStatus() != 0)
 	{
 		setCursorPosition(0, 0);
-		std::cout << "Game Already Over!          ";
+		std::cout << "Game Already Over!\n";
 		return;
 	}
 	bool isValid = true;
@@ -113,12 +115,25 @@ void minesweeper::play(char moveType, int rowidx, int colidx)
 	case 'z' :
 		if(getValueAt(rowidx, colidx) == '0')
 			UpdateBoard(rowidx, colidx, 'f');
+		else if(getValueAt(rowidx, colidx) == 'f')
+			UpdateBoard(rowidx, colidx, '0');
 		break;
 	}
 	if (!isValid) {
 		lost();
 	}
+	else if (unmarkedCell == maxBombs) {
+		win();
+	}
 	return;
+}
+void minesweeper::win() {
+	for (int i = 0; i < maxBombs; i++) {
+		int rowidx = bomb[i][0];
+		int colidx = bomb[i][1];
+		UpdateBoard(rowidx, colidx, 'B');
+	}
+	setWin();
 }
 
 void minesweeper::lost() {
